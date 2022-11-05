@@ -5,7 +5,19 @@
 /// <reference lib="deno.ns" />
 
 import { serve } from "https://deno.land/std@0.162.0/http/server.ts";
-import { h, renderSSR } from "https://deno.land/x/nano_jsx@v0.0.34/mod.ts";
+import { h, renderSSR, Component } from "https://deno.land/x/nano_jsx@v0.0.34/mod.ts";
+
+class CounterClass extends Component {
+  count = 0;
+
+  render(){
+    return (
+      <div>
+        「{this.count}」
+      </div>
+    );
+  }
+}
 
 const content = "Hello World! Hello Deno! Hello JSX!";
 const App = () => (
@@ -15,6 +27,7 @@ const App = () => (
     </head>
     <body>
       <div>{content}</div>
+      <CounterClass />
     </body>
   </html>
 );
