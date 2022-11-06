@@ -15,6 +15,12 @@ const App = () => (
   </html>
 );
 
+async function loadBundle() {
+  const decoder = new TextDecoder("utf-8");
+  const data = await Deno.readFile("./dynamically/bundle.js");
+  return decoder.decode(data);
+}
+
 serve((_req) => {
   const html = renderSSR(<App />);
   const response = new Response(html, {
