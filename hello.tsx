@@ -3,7 +3,7 @@ import { h, renderSSR, Component } from "https://deno.land/x/nano_jsx@v0.0.34/mo
 import { CounterClass } from "./components/counter.tsx"
 
 const content = "Hello World! Hello Deno! Hello JSX!";
-const App = () => (
+const App = (props: {bundle: string}) => (
   <html>
     <head>
       <title>hello deno deploy</title>
@@ -11,6 +11,9 @@ const App = () => (
     <body>
       <div>{content}</div>
       <CounterClass />
+      <script>
+        {props.bundle}
+      </script>
     </body>
   </html>
 );
@@ -21,8 +24,9 @@ async function loadBundle() {
   return decoder.decode(data);
 }
 
-serve((_req) => {
-  const html = renderSSR(<App />);
+serve(async (_req) => {
+  const bundle = await loadBundle();
+  const html = renderSSR(<App bundle={bundle}/>);
   const response = new Response(html, {
     headers: { "content-type": "text/html" },
   });
