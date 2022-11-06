@@ -9,7 +9,7 @@ export class CounterClass extends Component {
 
   render(){
     return (
-      <div>
+      <div id="counter">
         「{this.count}」
         <button onClick={()=>this.countUp()} >Count Up</button>
       </div>
