@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.162.0/http/server.ts";
 import { h, renderSSR, Component } from "https://deno.land/x/nano_jsx@v0.0.34/mod.ts";
+import { Footer} from "./components/layout.tsx"
 import { CounterClass } from "./components/counter.tsx"
 
 const content = "Hello World! Hello Deno! Hello JSX!";
@@ -14,6 +15,7 @@ const App = (props: {bundle: string}) => (
       <script>
         {props.bundle}
       </script>
+      <Footer />
     </body>
   </html>
 );
